@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 const productRouter = require('./routes/products') 
 const authRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
 
 const port = 6969;
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({limit:'10mb', extended:true}));
 
 app.use('/api/products', productRouter)
 app.use('/api/', authRouter)
+app.use('/api/users', userRouter)
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
