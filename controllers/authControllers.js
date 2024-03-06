@@ -22,12 +22,12 @@ module.exports = {
         try {
             const user = await User.findOne({ email: req.body.email });
             if (!user) {
-                return res.status(401).json("Wrong Credentials. Provide a valid email.");
+                return res.status(401).json({message: "Wrong Credentials. Provide a valid email."});
             }
 
             const isPasswordValid = await bcrypt.compare(req.body.password, User.password);
             if (!isPasswordValid) {
-                return res.status(401).json("Wrong Password!");
+                return res.status(401).json({message: "Wrong Password!"});
             }
 
             const userToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "7d" });
