@@ -25,7 +25,7 @@ module.exports = {
                 return res.status(401).json("Wrong Credentials. Provide a valid email.");
             }
 
-            const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+            const isPasswordValid = await bcrypt.compare(req.body.password, User.password);
             if (!isPasswordValid) {
                 return res.status(401).json("Wrong Password!");
             }
