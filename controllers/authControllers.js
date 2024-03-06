@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const ErrorResponse = require('../utils/errorResponse')
 module.exports = {
     createUser: async (req, res) => {
         try {
@@ -34,7 +35,7 @@ module.exports = {
             const { password, __v, createdAt, updatedAt, ...userData } = user._doc;
             res.status(200).json({ ...userData, token: userToken });
         } catch (error) {
-            res.status(500).json({ message: error });
+            res.status(500).json( new ErrorResponse("Invalid Crediantials")  );
         }
     }
 };
